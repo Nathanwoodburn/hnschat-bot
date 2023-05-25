@@ -16,4 +16,4 @@ npm install
 5. Type `keys` to get your key pair for e2ee.
 6. Fill in the values in `config.sample.json` and rename to `config.json`.
 7. Launch the bot with `node bot.js`.
-8. Typing `!hns` in a channel which you and the bot are in will make the bot reply with the current HNS price.
+8. Edit `push.js` to add your Gotify server url with your app token.
