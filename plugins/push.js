@@ -31,6 +31,9 @@ export class Plugin {
                     channel = channelID;
                     break;
             }
+            if (!this.bot.isChannel(channelID)) {
+                channel = "DM";
+            }
             
             let user = this.bot.userForID(msg.user).domain;
             let message = msg.message;
