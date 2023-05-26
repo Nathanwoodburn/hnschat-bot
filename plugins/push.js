@@ -19,22 +19,11 @@ export class Plugin {
             }
             let channelID = msg.conversation;
             let channel = "No Channel";
-            switch (channelID) {
-                case "T4McaFXy":
-                    channel = "Test";
-                    break;
-                case "P8xEzhTP":
-                    channel = "General";
-                    break;
-                case "iwn6wouI":
-                    channel = "Hard Fork";
-                    break;
-                default:
-                    channel = channelID;
-                    break;
-            }
             if (!this.bot.isChannel(channelID)) {
                 channel = "DM";
+            }
+            else {
+                channel = this.bot.channelForID(channelID).name;
             }
             
             let user = this.bot.userForID(msg.user).domain;

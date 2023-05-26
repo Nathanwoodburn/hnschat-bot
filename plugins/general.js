@@ -8,7 +8,7 @@ export class Plugin {
 
 		this.events = new events.EventEmitter();
 
-		this.commands = ["commands", "whoami", "whois", "call","hnscall","hcall"];
+		this.commands = ["commands", "whoami", "whois", "call", "hnscall", "hcall", "channel"];
 
 		this.init();
 	}
@@ -20,7 +20,10 @@ export class Plugin {
 					let commands = [];
 					this.bot.PluginManager.plugins.forEach(p => {
 						if (p.name !== "admin") {
-							commands = [...commands, ...p.plugin.commands];
+							if (!p.plugin.commands) {
+                                p.plugin.commands = [];
+                            }
+                            commands = [...commands, ...p.plugin.commands];
 						}
 					});
 					commands = commands.filter(c => {
@@ -56,6 +59,11 @@ export class Plugin {
 					let user = this.bot.userForID(msg.user).domain;
 					let meeting = "https://hcall/" + user;
 					this.bot.sendMessage(msg, { message: meeting, reply: 1 });
+					break;
+				case "channel":
+					let channelID = this.bot.channelForID(msg.conversation).name;
+					let meeting1 = "https://hcall/" + channelID;
+					this.bot.sendMessage(msg, { message: meeting1, reply: 1 });
 					break;
 			}
 		});
