@@ -8,7 +8,7 @@ export class Plugin {
 
 		this.events = new events.EventEmitter();
 
-		this.commands = ["commands", "whoami", "whois"];
+		this.commands = ["commands", "whoami", "whois", "call","hnscall","hcall"];
 
 		this.init();
 	}
@@ -49,6 +49,13 @@ export class Plugin {
 						}
 						this.bot.sendMessage(msg, { message: user, reply: 1 });
 					}
+					break;
+				case "call":
+				case "hnscall":
+				case "hcall":
+					let user = this.bot.userForID(msg.user).domain;
+					let meeting = "https://hcall/" + user;
+					this.bot.sendMessage(msg, { message: meeting, reply: 1 });
 					break;
 			}
 		});

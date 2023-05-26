@@ -1,6 +1,5 @@
 import events from "events";
 import axios from "axios";
-import { SlowBuffer } from "buffer";
 export class Plugin {
     constructor(bot) {
         this.bot = bot;
