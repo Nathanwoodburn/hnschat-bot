@@ -14,7 +14,10 @@ export class Plugin {
 
     init() {
         this.events.on("MESSAGE", async msg => {
-
+            if (this.bot.userIsActive("VXGCrUxV1VtctnDM")){
+                console.log("Ignoring message as user is active");
+                return;
+            }
             let channelID = msg.conversation;
             let channel = "No Channel";
             switch (channelID) {
@@ -40,7 +43,7 @@ export class Plugin {
             let title = channel + ": " + user;
             
 
-            const url = "https://push.woodburn.au/message?token=";
+            const url = "https://push.woodburn.au/message?token=Ad0psJDKG2a.FBX";
             const bodyFormData = {
                 title: title,
                 message: message,
