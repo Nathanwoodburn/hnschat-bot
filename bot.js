@@ -21,6 +21,7 @@ export class HNSChat {
 		this.conversation;
 
 		this.users;
+		this.active;
 
 		this.channels;
 		this.pms;
@@ -153,6 +154,7 @@ export class HNSChat {
 				this.users = body;
 				this.ws.send(`CHANNELS`);
 				this.ws.send(`PMS`);
+				this.ws.send("PING");
 				break;
 
 			case "USER":
@@ -243,6 +245,10 @@ export class HNSChat {
 					}
 				});
 				break;
+
+			case "PONG":
+				this.active = body.active;
+				break;
 		}
 	}
 
@@ -318,9 +324,15 @@ export class HNSChat {
 	}
 
 	userForName(name) {
-		return this.users.filter(u => {
+		let matches = this.users.filter(u => {
 			return u.domain == name;
-		})[0];
+		});
+
+		matches.sort((a, b) => {
+			return a.locked - b.locked;
+		});
+
+		return matches[0];
 	}
 
 	usersForConversation(id) {
@@ -338,6 +350,10 @@ export class HNSChat {
 		}
 
 		return users;
+	}
+
+	userIsActive(id) {
+		return this.active.includes(id);
 	}
 
 	async makeSecret(conversation) {
