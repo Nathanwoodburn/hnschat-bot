@@ -21,9 +21,9 @@ export class Plugin {
 					this.bot.PluginManager.plugins.forEach(p => {
 						if (p.name !== "admin") {
 							if (!p.plugin.commands) {
-                                p.plugin.commands = [];
-                            }
-                            commands = [...commands, ...p.plugin.commands];
+								p.plugin.commands = [];
+							}
+							commands = [...commands, ...p.plugin.commands];
 						}
 					});
 					commands = commands.filter(c => {
