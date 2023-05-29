@@ -20,12 +20,17 @@ export class ws {
 					this.send("PING");
 				}, 30000);
 
+				this.typing = setInterval(() => {
+					this.parent.sendTyping();
+				}, 2000);
+
 				resolve();
 			}
 
 			this.socket.onclose = (e) => {
 				console.log("DISCONNECTED");
 				clearInterval(this.ping);
+				clearInterval(this.typing);
 
 				this.parent.ready(false);
 				setTimeout(() => {
