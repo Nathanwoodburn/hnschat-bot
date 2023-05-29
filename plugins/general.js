@@ -8,7 +8,7 @@ export class Plugin {
 
 		this.events = new events.EventEmitter();
 
-		this.commands = ["commands", "whoami", "whois", "call", "hnscall", "hcall", "channel"];
+		this.commands = ["commands", "whoami", "whois", "call", "hnscall", "hcall", "channel", "ping"];
 
 		this.init();
 	}
@@ -64,6 +64,9 @@ export class Plugin {
 					let channelID = this.bot.channelForID(msg.conversation).name;
 					let meeting1 = "https://hcall/" + channelID;
 					this.bot.sendMessage(msg, { message: meeting1, reply: 1 });
+					break;
+				case "ping":
+					this.bot.sendMessage(msg, { message: "pong", reply: 1 });
 					break;
 			}
 		});
