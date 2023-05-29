@@ -8,7 +8,7 @@ export class Plugin {
 
 		this.events = new events.EventEmitter();
 
-		this.commands = ["commands", "whoami", "whois", "call", "hnscall", "hcall", "channel", "ping"];
+		this.commands = ["commands", "call", "hnscall", "hcall", "channel", "ping"];
 
 		this.init();
 	}
@@ -34,24 +34,6 @@ export class Plugin {
 						commands[k] = `${this.bot.config.trigger}${command}`;
 					});
 					this.bot.sendMessage(msg, { message: `Here is a list of my available commands:\n${commands.join(", ")}` });
-					break;
-
-				case "whoami":
-					this.bot.sendMessage(msg, { message: msg.user, reply: 1 });
-					break;
-
-				case "whois":
-					let split = msg.message.split(" ");
-					if (split.length > 1) {
-						let user = split[1];
-						if (user[0] == "@") {
-							user = user.substring(1);
-						}
-						else {
-							user = this.bot.userForName(user).id;
-						}
-						this.bot.sendMessage(msg, { message: user, reply: 1 });
-					}
 					break;
 				case "call":
 				case "hnscall":
