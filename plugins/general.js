@@ -39,8 +39,15 @@ export class Plugin {
 				case "hnscall":
 				case "hcall":
 					let user = this.bot.userForID(msg.user).domain;
-					let meeting = "https://hcall/" + user;
-					this.bot.sendMessage(msg, { message: meeting, reply: 1 });
+					if (params.length === 0) {
+						let meeting = "https://hcall/" + user;
+						this.bot.sendMessage(msg, { message: meeting, reply: 1 });
+					} else {
+						// Concatenate the parameters into a single string
+						let room = params.join("-");
+						let meeting = "https://hcall/" + room;
+						this.bot.sendMessage(msg, { message: meeting, reply: 1 });
+					}
 					break;
 				case "channel":
 					let channelID = this.bot.channelForID(msg.conversation).name;
