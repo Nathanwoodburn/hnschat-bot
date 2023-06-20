@@ -17,17 +17,18 @@ export class PluginManager {
 				if (files.length) {
 					files.forEach((file, k) => {
 						let name = file.split(".")[0];
-						import(`${url.pathToFileURL(`${this.dir}/${file}`).href}?t=${Date.now()}`).then(p => {
-							this.plugins.push({
-								name: name,
-								plugin: new p["Plugin"](this.bot)
+						if (this.bot.config.plugins.includes(name)) {
+							import(`${url.pathToFileURL(`${this.dir}/${file}`).href}?t=${Date.now()}`).then(p => {
+								this.plugins.push({
+									name: name,
+									plugin: new p["Plugin"](this.bot)
+								});
+								console.log(`LOADED PLUGIN: ${name}`);
 							});
-							console.log(`LOADED PLUGIN: ${name}`);
-
-							if (k == files.length - 1) {
-								resolve();
-							}
-						});
+						}
+						if (k == files.length - 1) {
+							resolve();
+						}
 					});
 				}
 				else {
@@ -50,32 +51,24 @@ export class PluginManager {
 
 	emit(command, msg) {
 		let plugins;
+
+		let cmd,params;
 		switch (command) {
 			case "COMMAND":
 				let split = msg.message.split(" ");
-				let cmd = split[0].substring(1);
+				cmd = split[0].substring(1);
 				split.shift();
-				let params = split;
-
+				params = split;
 				plugins = this.pluginsForCommand(cmd);
-				plugins.forEach(p => {
-					p.plugin.events.emit(command, msg, cmd, params);
-				});
 				break;
 
 			case "MESSAGE":
 				plugins = this.pluginsForType(command);
-				plugins.forEach(p => {
-					p.plugin.events.emit(command, msg);
-				});
 				break;
 
 			case "ERROR":
 			case "SUCCESS":
 				plugins = this.pluginsForResponses(msg.type);
-				plugins.forEach(p => {
-					p.plugin.events.emit(command, msg);
-				});
 				break;
 		}
 
@@ -86,6 +79,14 @@ export class PluginManager {
 				}
 				break;
 		}
+
+		this.pluginEmit(plugins, command, msg, cmd, params);
+	}
+
+	pluginEmit(plugins, command, msg, cmd=false, params=false) {
+		plugins.forEach(p => {
+			p.plugin.events.emit(command, msg, cmd, params);
+		});
 	}
 
 	pluginsForCommand(command) {
