@@ -9,14 +9,14 @@ export class Plugin {
 		this.events = new events.EventEmitter();
 
 		this.commands = [];
+        this.types = ["READY"];
 		this.init();
 	}
 
 	init() {
 		// Send message to channel when bot starts
-        // wait 5 seconds to allow other plugins to load
-        setTimeout(() => {
-        this.bot.sendMessage({conversation: `5DkLWHPq`},{ message: `Bot Restarted` })
-        }, 10000);
+        this.events.on("READY", (msg) => {
+            this.bot.sendMessage({conversation: `5DkLWHPq`},{ message: `Bot Restarted` })
+        });
 	}
 }
