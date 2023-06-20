@@ -16,7 +16,7 @@ export class Plugin {
 		// Send message to channel when bot starts
         // wait 5 seconds to allow other plugins to load
         setTimeout(() => {
-            this.bot.sendMessage({conversation: `5DkLWHPq`},{ message: `Bot Restarted` })
-        }, 5000);
+        this.bot.sendMessage({conversation: `5DkLWHPq`},{ message: `Bot Restarted` })
+        }, 3000);
 	}
 }
