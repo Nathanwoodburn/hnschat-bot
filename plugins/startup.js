@@ -17,6 +17,6 @@ export class Plugin {
         // wait 5 seconds to allow other plugins to load
         setTimeout(() => {
         this.bot.sendMessage({conversation: `5DkLWHPq`},{ message: `Bot Restarted` })
-        }, 3000);
+        }, 10000);
 	}
 }
