@@ -19,7 +19,7 @@ export class Plugin {
                 case "gw":
                     // Check if the message is a reply
                     if (!msg.replying) {
-                        this.bot.sendMessage(msg, { message: `Please reply to a message` });
+                        this.bot.sendMessage(msg, { message: `Please reply to a message`, reply: 1 });
                         return;
                     }
 
@@ -27,14 +27,14 @@ export class Plugin {
                     this.bot.getMessage(msg.replying).then(msg => {
                         // Get second parameter as emoji
                         if (params.length === 0) {
-                            this.bot.sendMessage(msg, { message: `Please specify an emoji` });
+                            this.bot.sendMessage(msg, { message: `Please specify an emoji`, reply: 1 });
                             return;
                         }
                         let emoji = params[0];
                         let reactions = msg.reactions;
                         // Check if the emoji is in the reactions
                         if (!reactions.includes(emoji)) {
-                            this.bot.sendMessage(msg, { message: `The emoji ${emoji} is not in the reactions` });
+                            this.bot.sendMessage(msg, { message: `The emoji ${emoji} is not in the reactions`, reply: 1 });
                             return;
                         }
 
@@ -45,7 +45,7 @@ export class Plugin {
                         // Get the name of the winner
                         let winnerName = this.bot.userForID(winner).domain;
                         // Send the winner
-                        this.bot.sendMessage(msg, { message: `The winner is ${winnerName}` });
+                        this.bot.sendMessage(msg, { message: `The winner is @${winner}` });
                     });
 
                     
