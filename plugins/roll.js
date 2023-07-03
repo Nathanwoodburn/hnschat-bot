@@ -79,4 +79,7 @@ export class Plugin {
 			}
 		});
 	}
+    get help() {
+        return `Roll a die. Usage: ${this.bot.config.trigger}roll [sides (6)] [rolls (1)]`;
+    }
 }
