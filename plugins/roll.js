@@ -32,7 +32,8 @@ export class Plugin {
                         let roll = Math.floor(Math.random() * sides) + 1;
                         if (roll < 6) {
                             let emoji = dice[roll - 1];
-                            this.bot.sendMessage(msg, { message: `You rolled a ${emoji}`, reply: 1 });
+                            this.bot.sendMessage(msg, { message: `You rolled a`, reply: 1 });
+                            this.bot.sendMessage(msg, { message: `${emoji}`});
                         } else {
                             this.bot.sendMessage(msg, { message: `You rolled a ${roll}`, reply: 1 });
                         }
