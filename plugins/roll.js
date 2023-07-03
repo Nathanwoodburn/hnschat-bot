@@ -1,6 +1,8 @@
 import events from "events";
 
 import fetch from "node-fetch";
+
+const dice = ["⚀","⚁","⚂","⚃","⚄","⚅"]
 		
 export class Plugin {
 	constructor(bot) {
@@ -20,14 +22,20 @@ export class Plugin {
 					// If no parameters are given, roll a 6-sided die
                     if (params.length === 0) {
                         let roll = Math.floor(Math.random() * 6) + 1;
-                        this.bot.sendMessage(msg, { message: `You rolled a ${roll}`, reply: 1 });
+                        let emoji = dice[roll - 1];
+                        this.bot.sendMessage(msg, { message: `You rolled a ${emoji}`, reply: 1 });
                         return;
                     }
                     // If one parameter is given, roll a die with that many sides
                     if (params.length === 1) {
                         let sides = params[0];
                         let roll = Math.floor(Math.random() * sides) + 1;
-                        this.bot.sendMessage(msg, { message: `You rolled a ${roll}`, reply: 1 });
+                        if (roll < 6) {
+                            let emoji = dice[roll - 1];
+                            this.bot.sendMessage(msg, { message: `You rolled a ${emoji}`, reply: 1 });
+                        } else {
+                            this.bot.sendMessage(msg, { message: `You rolled a ${roll}`, reply: 1 });
+                        }
                         return;
                     }
                     // If two parameters are given, roll a die with that many sides that many times
@@ -40,7 +48,13 @@ export class Plugin {
                             results.push(roll);
                         }
                         let total = results.reduce((a, b) => a + b, 0);
-                        this.bot.sendMessage(msg, { message: `You rolled ${results.join(", ")} for a total of ${total}`, reply: 1 });
+                        if (sides < 6) {
+                            let emoji = results.map(r => dice[r - 1]);
+                            this.bot.sendMessage(msg, { message: `You rolled ${emoji.join(", ")} for a total of ${total}`, reply: 1 });
+                        }
+                        else {
+                            this.bot.sendMessage(msg, { message: `You rolled ${results.join(", ")} for a total of ${total}`, reply: 1 });
+                        }
                         return;
                     }
                     // If more than two parameters are given, return usage
