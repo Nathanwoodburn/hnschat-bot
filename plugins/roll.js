@@ -74,7 +74,7 @@ export class Plugin {
                         return;
                     }
                     // If more than two parameters are given, return usage
-                    this.bot.sendMessage(msg, { message: `Usage: ${this.bot.config.trigger}roll [sides] [rolls]`, reply: 1 });
+                    this.bot.sendMessage(msg, { message: `Usage: ${this.bot.config.trigger}roll [sides (6)] [rolls (1)]`, reply: 1 });
 					break;
 			}
 		});
