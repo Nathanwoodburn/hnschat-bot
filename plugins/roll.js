@@ -39,7 +39,8 @@ export class Plugin {
                             let roll = Math.floor(Math.random() * sides) + 1;
                             results.push(roll);
                         }
-                        this.bot.sendMessage(msg, { message: `You rolled ${results.join(", ")}`, reply: 1 });
+                        let total = results.reduce((a, b) => a + b, 0);
+                        this.bot.sendMessage(msg, { message: `You rolled ${results.join(", ")} for a total of ${total}`, reply: 1 });
                         return;
                     }
                     // If more than two parameters are given, return usage
