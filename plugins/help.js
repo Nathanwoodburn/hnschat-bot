@@ -26,9 +26,18 @@ export class Plugin {
                     // If one parameter is given, show help for command
                     if (params.length === 1) {
                         let command = params[0];
-                        let plugin = this.bot.PluginManager.plugins.find(p => {
-                            return p.plugin.commands.includes(command);
+                        let plugin = false;
+                        // for each plugin
+                        this.bot.PluginManager.plugins.forEach(p => {
+                            // if the plugin has commands
+                            if (p.plugin.commands) {
+                                // if the command is in the plugin's commands
+                                if (p.plugin.commands.includes(command)) {
+                                    plugin = p;
+                                }
+                            }
                         });
+                        // If the command is not found
                         if (!plugin) {
                             this.bot.sendMessage(msg, { message: `Command ${command} not found`, reply: 1});
                             return;
@@ -38,6 +47,7 @@ export class Plugin {
                             this.bot.sendMessage(msg, { message: `No help found for ${command}`, reply: 1 });
                             return;
                         }
+                        console.log(help);
                         this.bot.sendMessage(msg, { message: help, reply: 1 });
                         return;
                     }
