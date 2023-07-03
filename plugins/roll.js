@@ -23,7 +23,11 @@ export class Plugin {
                     if (params.length === 0) {
                         let roll = Math.floor(Math.random() * 6) + 1;
                         let emoji = dice[roll - 1];
-                        this.bot.sendMessage(msg, { message: `You rolled a ${emoji}`, reply: 1 });
+                        this.bot.sendMessage(msg, { message: `You rolled a`, reply: 1 });
+                        // Wait for it to send
+                        setTimeout(() => {
+                            this.bot.sendMessage(msg, { message: `${emoji}`});
+                        }, 1000);
                         return;
                     }
                     // If one parameter is given, roll a die with that many sides
@@ -33,7 +37,10 @@ export class Plugin {
                         if (roll < 6) {
                             let emoji = dice[roll - 1];
                             this.bot.sendMessage(msg, { message: `You rolled a`, reply: 1 });
-                            this.bot.sendMessage(msg, { message: `${emoji}`});
+                            // Wait for it to send
+                            setTimeout(() => {
+                                this.bot.sendMessage(msg, { message: `${emoji}`});
+                            }, 1000);
                         } else {
                             this.bot.sendMessage(msg, { message: `You rolled a ${roll}`, reply: 1 });
                         }
@@ -51,7 +58,15 @@ export class Plugin {
                         let total = results.reduce((a, b) => a + b, 0);
                         if (sides < 6) {
                             let emoji = results.map(r => dice[r - 1]);
-                            this.bot.sendMessage(msg, { message: `You rolled ${emoji.join(", ")} for a total of ${total}`, reply: 1 });
+                            this.bot.sendMessage(msg, { message: `You rolled`, reply: 1 });
+                            // Wait for it to send
+                            setTimeout(() => {
+                                this.bot.sendMessage(msg, { message: `${emoji.join("")}`});
+                            }, 1000);
+                            // Wait for it to send
+                            setTimeout(() => {
+                                this.bot.sendMessage(msg, { message: `for a total of ${total}`});
+                            }, 2000);
                         }
                         else {
                             this.bot.sendMessage(msg, { message: `You rolled ${results.join(", ")} for a total of ${total}`, reply: 1 });
