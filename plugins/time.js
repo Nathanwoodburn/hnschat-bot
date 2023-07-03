@@ -95,4 +95,7 @@ export class Plugin {
 			}
 		});
 	}
+    get help() {
+        return "Usage: !now\nUsage: !time [time] [AM/PM]";
+    }
 }

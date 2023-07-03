@@ -19,7 +19,7 @@ export class Plugin {
 				case "help":
 					// If no parameters are given, send usage
                     if (params.length === 0) {
-                        this.bot.sendMessage(msg, { message: `Usage: ${this.bot.config.trigger}help \<command\>` , reply: 1 });
+                        this.bot.sendMessage(msg, { message: `Usage: ${this.bot.config.trigger}help [command]` , reply: 1 });
 
                         return;
                     }
@@ -47,13 +47,13 @@ export class Plugin {
                             this.bot.sendMessage(msg, { message: `No help found for ${command}`, reply: 1 });
                             return;
                         }
-                        console.log(help);
+
                         this.bot.sendMessage(msg, { message: help, reply: 1 });
                         return;
                     }
                     // If two parameters are given, show usage
                     if (params.length > 1) {
-                        this.bot.sendMessage(msg, { message: `Usage: ${this.bot.config.trigger}help \<command\>` , reply: 1 });
+                        this.bot.sendMessage(msg, { message: `Usage: ${this.bot.config.trigger}help [command]` , reply: 1 });
                         return;
                     }
 					break;

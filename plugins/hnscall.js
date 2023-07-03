@@ -60,4 +60,7 @@ export class Plugin {
 			}
 		});
 	}
+	get help() {
+		return `Usage: ${this.bot.config.trigger}commands\n\n${this.bot.config.trigger}call [room]\n\n ${this.bot.config.trigger}channel\n\n ${this.bot.config.trigger}ping`;
+	}
 }

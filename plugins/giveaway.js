@@ -53,4 +53,7 @@ export class Plugin {
 			}
 		});
 	}
+    get help() {
+        return "Usage: !gw [emoji]";
+    }
 }
