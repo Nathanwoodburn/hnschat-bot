@@ -26,7 +26,7 @@ export class Plugin {
                         this.bot.sendMessage(msg, { message: `You rolled a`, reply: 1 });
                         // Wait for it to send
                         setTimeout(() => {
-                            this.bot.sendMessage(msg, { message: `${emoji}`});
+                            this.bot.sendMessage(msg, { message: `${emoji}`, style: "fancy"});
                         }, 100);
                         return;
                     }
@@ -39,7 +39,7 @@ export class Plugin {
                             this.bot.sendMessage(msg, { message: `You rolled a`, reply: 1 });
                             // Wait for it to send
                             setTimeout(() => {
-                                this.bot.sendMessage(msg, { message: `${emoji}`});
+                                this.bot.sendMessage(msg, { message: `${emoji}`,style: "fancy"});
                             }, 100);
                         } else {
                             this.bot.sendMessage(msg, { message: `You rolled a ${roll}`, reply: 1 });
@@ -61,7 +61,7 @@ export class Plugin {
                             this.bot.sendMessage(msg, { message: `You rolled`, reply: 1 });
                             // Wait for it to send
                             setTimeout(() => {
-                                this.bot.sendMessage(msg, { message: `${emoji.join("")}`});
+                                this.bot.sendMessage(msg, { message: `${emoji.join("")}`, style: "fancy"});
                             }, 100);
                             // Wait for it to send
                             setTimeout(() => {
