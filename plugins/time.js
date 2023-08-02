@@ -96,6 +96,6 @@ export class Plugin {
 		});
 	}
     get help() {
-        return "Usage: !now\nUsage: !time [time] [AM/PM]";
+        return "Usage:\n\n${this.bot.config.trigger}now\n\n${this.bot.config.trigger}time [time] [AM/PM]";
     }
 }

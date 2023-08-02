@@ -54,6 +54,6 @@ export class Plugin {
 		});
 	}
     get help() {
-        return "Usage: !gw [emoji]";
+        return "Usage:\n\n${this.bot.config.trigger}gw [emoji]\n\nReply to the message which people react to and specify the enter draw emoji";
     }
 }
