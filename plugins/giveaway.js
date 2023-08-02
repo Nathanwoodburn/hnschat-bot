@@ -8,7 +8,7 @@ export class Plugin {
 
 		this.events = new events.EventEmitter();
 
-		this.commands = ["gw"];
+		this.commands = ["gw", "giveaway"];
 
 		this.init();
 	}
@@ -17,6 +17,7 @@ export class Plugin {
 		this.events.on("COMMAND", (msg, command, params) => {
 			switch (command) {
                 case "gw":
+                case "giveaway":
                     // Check if the message is a reply
                     if (!msg.replying) {
                         this.bot.sendMessage(msg, { message: `Please reply to a message`, reply: 1 });
@@ -54,6 +55,6 @@ export class Plugin {
 		});
 	}
     get help() {
-        return "Usage:\n\n${this.bot.config.trigger}gw [emoji]\n\nReply to the message which people react to and specify the enter draw emoji";
+        return `Usage:\n\n${this.bot.config.trigger}gw [emoji]\n\nReply to the message which people react to and specify the enter draw emoji`;
     }
 }
